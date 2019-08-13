@@ -71,6 +71,9 @@ simulation
     .links(links);
 
 function ticked() {
+    simulation.alpha(1);
+    document.getElementById('active')!.innerText = active ? active.key : '';
+
     for (let i = 0; i < link.size(); ++i) {
         let datum = link.data()[i] as any;
         let line = link.nodes()[i];
@@ -125,3 +128,15 @@ function dragended(d: any) {
     d.fx = null;
     d.fy = null;
 }
+
+window.addEventListener('keyup', e => {
+    if (active == null) return;
+
+    switch (e.keyCode) {
+        case 81:
+            window.open(`https://npmjs.com/package/${active.name}`);
+            break;
+        default:
+            console.log(e.keyCode);
+    }
+});
